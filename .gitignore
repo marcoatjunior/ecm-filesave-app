@@ -1,0 +1,10 @@
+.env
+.idea/
+.next/
+.scw/
+.vscode/
+coverage/
+node_modules/
+out/
+.*rc
+.*rc.json
