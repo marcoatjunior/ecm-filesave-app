@@ -36,7 +36,7 @@ export const Main = styled.main`
 
 export const Container = styled.div`
   padding: 30px;
-  border 2px solid #ffbb20;
+  border 2px solid #fc610c;
   border-radius: 10px;
   background: #fff;
 `;

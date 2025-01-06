@@ -42,7 +42,7 @@ const Home: NextPage = () => {
             >
               <Image
                 style={{ border: '1px solid #e8e8e8', borderRadius: '5px' }}
-                src="/qr-code.svg"
+                src="/qrcode.svg"
                 alt="qrcode"
                 width={250}
                 height={250}
