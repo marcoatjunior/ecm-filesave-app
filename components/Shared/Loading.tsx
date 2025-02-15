@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
-const Loader = styled.div`
+interface LoaderProps {
+  className?: string;
+  children?: React.ReactNode; // Adiciona suporte para children
+}
+
+const Loader = styled.div.attrs<LoaderProps>(() => ({
+  className: 'loader',
+}))`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -53,7 +60,9 @@ const Loader = styled.div`
   }
 `;
 
-const Spinner = styled.div`
+const Spinner = styled.div.attrs<LoaderProps>(() => ({
+  className: 'spinner',
+}))`
   width: 200px;
   height: 200px;
   transform: translateZ(0) scale(1);
@@ -90,8 +99,8 @@ const Spinner = styled.div`
 `;
 
 export const Loading: React.FC = () => (
-  <Loader className="loader">
-    <Spinner className="spinner">
+  <Loader>
+    <Spinner>
       <div></div>
       <div></div>
       <div></div>

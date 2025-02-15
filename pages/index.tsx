@@ -36,10 +36,7 @@ const Home: NextPage = () => {
             <Label pointing="below" size="big">
               {home.toqueAbaixo}
             </Label>
-            <Display
-              style={{ cursor: 'pointer' }}
-              onClick={() => setExibeModal(true)}
-            >
+            <Display cursor="pointer" onClick={() => setExibeModal(true)}>
               <Image
                 style={{ border: '1px solid #e8e8e8', borderRadius: '5px' }}
                 src="/qrcode.svg"

@@ -1,4 +1,4 @@
-FROM node:16-alpine as deps
+FROM node:22-alpine AS development
 RUN apk add --no-cache libc6-compat
 
 # Configura Workdir
@@ -7,26 +7,26 @@ RUN date
 WORKDIR /app
 
 # Configura repositorio
-COPY .npmrc .yarnrc package.json yarn.lock ./
+COPY .npmrc package.json .env ./
 
 # Instala dependências
-RUN yarn --frozen-lockfile
+RUN npm install --legacy-peer-deps
 
 # State build 
-FROM node:16-alpine as builder
+FROM node:22-alpine as builder
 WORKDIR /app
 
 # Copia código
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN yarn build
+COPY --from=development /app/node_modules ./node_modules
+COPY . ./
+RUN npm run build
 
 # Stage de deploy
-FROM node:16-alpine as runner
+FROM node:22-alpine as runner
 WORKDIR /app
 ENV NODE_ENV production
 
-# Adiciona usuáriosa ao container
+# Adiciona usuários ao container
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 

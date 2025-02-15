@@ -1,7 +1,20 @@
+import { TextStyleProps } from '@/components/Shared/Text';
 import { useEffect, useState } from 'react';
 import { commons } from 'resources/strings';
-import { Text } from '@/components/Shared/Text';
+import styled from 'styled-components';
 import { Display } from './Body';
+
+interface ContadorProps extends TextStyleProps {
+  backgroundColor?: string;
+}
+
+export const TextContador = styled.p<ContadorProps>`
+  display: 'flex';
+  padding: '10px';
+  border-radius: '5px';
+  font-weight: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : '600'};
+`;
 
 export const ExpirationTimer: React.FC<{
   expirationInMilisseconds: number;
@@ -48,17 +61,12 @@ export const ExpirationTimer: React.FC<{
       alignItems="flex-end"
       justifyContent="flex-end"
       width="100%"
-      style={{ marginBottom: 'auto', marginRight: '20px' }}
+      marginBottom="auto"
+      marginRight="20px"
     >
-      <Text
+      <TextContador
         color="#fff"
-        style={{
-          display: 'flex',
-          padding: '10px',
-          borderRadius: '5px',
-          backgroundColor: isExpirado ? '#f44336' : 'rgb(252 97 12)',
-        }}
-        className="text-expira-em"
+        backgroundColor={isExpirado ? '#f44336' : 'rgb(252 97 12)'}
       >
         {expiraEm}{' '}
         {!isExpirado && (
@@ -70,7 +78,7 @@ export const ExpirationTimer: React.FC<{
             ></i>
           </span>
         )}
-      </Text>
+      </TextContador>
     </Display>
   );
 };

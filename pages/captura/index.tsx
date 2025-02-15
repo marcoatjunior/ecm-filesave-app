@@ -64,14 +64,14 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
     solicitacao.dados.arquivos.forEach((arquivo) => {
       const conteudo = arquivo.form?.get('arquivos') as unknown as Blob;
       const formData = new FormData();
-      formData.append("organizacao", solicitacao.dados.organizacao);
-      formData.append("sistema", solicitacao.dados.sistema);
-      formData.append("nome", arquivo.nome);
-      formData.append("tipo", arquivo.tipo);
-      formData.append("usuarioCriacao", arquivo.usuarioCriacao);
-      formData.append("numeroBytes", conteudo?.size?.toString());
-      formData.append("conteudo", conteudo as any);
-      
+      formData.append('organizacao', solicitacao.dados.organizacao);
+      formData.append('sistema', solicitacao.dados.sistema);
+      formData.append('nome', arquivo.nome);
+      formData.append('tipo', arquivo.tipo);
+      formData.append('usuarioCriacao', arquivo.usuarioCriacao);
+      formData.append('numeroBytes', conteudo?.size?.toString());
+      formData.append('conteudo', conteudo as any);
+
       inclui(apiUrl, formData)
         .then(() => {
           setEnviado((enviado) => enviado + 1);
@@ -131,7 +131,7 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
             onClick={() => {
               dispatchUpload({ type: UploadActions.INICIA });
             }}
-            style={{ marginLeft: '5px' }}
+            marginLeft="5px"
           >
             {acoes.fazerUpload}
           </PrimaryButton>
@@ -155,7 +155,7 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
             expiredText={capturas.expirada}
             expiringPrefixText={capturas.expiraEm}
           />
-          <Container style={{ marginBottom: 'auto' }}>
+          <Container marginBottom="auto">
             <Display justifyContent="space-between">
               <Text fontSize="16px" textAlign="center" fontWeight={600}>
                 {getArquivosCapturados()}
@@ -165,7 +165,7 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
               </CloseButton>
             </Display>
 
-            <Display display="grid" style={{ marginTop: '20px' }}>
+            <Display display="grid" marginTop="20px">
               <Label fontSize="20px" textAlign="center">
                 {arquivoAtual?.nome.toUpperCase()}
               </Label>
@@ -188,9 +188,7 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
 
       {solicitacao.enviada && (
         <ModalResult isSucesso={!solicitacao.erro}>
-          <Text style={{ width: '100%' }}>
-            {solicitacao.erro || capturas.finalizada}
-          </Text>
+          <Text width="100%">{solicitacao.erro || capturas.finalizada}</Text>
           <PrimaryButton onClick={() => dispatcher(cancelaSolicitacao())}>
             {commons.voltarInicio}
           </PrimaryButton>

@@ -1,6 +1,6 @@
 import { Container, Display } from '@/components/Shared';
 import { SecondaryButton } from '@/components/Shared/Button';
-import { Text } from '@/components/Shared/Text';
+import { Text, TextErro } from '@/components/Shared/Text';
 import { ChangeEvent, Dispatch, useState } from 'react';
 import { acoes, upload } from 'resources/strings';
 import { UploadActions } from 'store/upload';
@@ -45,24 +45,19 @@ export const FileUploader = ({ arquivo, dispatch }: FileUploaderProps) => {
         </Text>
       </Display>
       {erro && (
-        <Display style={{ marginTop: '12px' }}>
-          <Text
+        <Display marginTop="12px">
+          <TextErro
             fontSize="16px"
             textAlign="center"
             fontWeight={600}
             color="#fff"
-            style={{
-              borderRadius: '5px',
-              backgroundColor: '#f44336',
-              padding: '5px 8px',
-            }}
           >
             {mensagemErro}
-          </Text>
+          </TextErro>
         </Display>
       )}
       {files.length > 0 && (
-        <Display style={{ marginTop: '12px' }}>
+        <Display marginTop="12px">
           <Text fontSize="16px" textAlign="center" fontWeight={600}>
             {`${files.length} arquivo(s) selecionado(s)`}
           </Text>
@@ -96,7 +91,7 @@ export const FileUploader = ({ arquivo, dispatch }: FileUploaderProps) => {
         {files.length > 0 && (
           <SecondaryButton
             onClick={handleUploadClick}
-            style={{ marginLeft: '10px' }}
+            marginLeft="10px"
           >
             {acoes.confirmar}
           </SecondaryButton>

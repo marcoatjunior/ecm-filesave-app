@@ -5,13 +5,28 @@ interface DisplayProps {
   display?: string;
   alignItems?: string;
   justifyContent?: string;
+  marginTop?: string;
+  marginBottom?: string;
+  marginRight?: string;
+  cursor?: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
+}
+
+interface ContainerProps {
+  marginBottom?: string;
+  children?: React.ReactNode;
 }
 
 export const Display = styled.div<DisplayProps>`
   width: ${(props) => props.width || 'auto'};
   display: ${(props) => props.display || 'flex'};
+  cursor: ${(props) => props.cursor || 'pointer'};
   align-items: ${(props) => props.alignItems || 'center'};
   justify-content: ${(props) => props.justifyContent || 'center'};
+  margin-top: ${(props) => props.marginTop || '0px'};
+  margin-bottom: ${(props) => props.marginBottom || '0px'};
+  margin-right: ${(props) => props.marginRight || '0px'};
 `;
 
 export const Main = styled.main`
@@ -25,9 +40,10 @@ export const Main = styled.main`
   background: #eeebeb;
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
   padding: 30px;
   border 2px solid #fc610c;
   border-radius: 10px;
   background: #fff;
+  margin-bottom: ${(props) => props.marginBottom || '0px'};
 `;

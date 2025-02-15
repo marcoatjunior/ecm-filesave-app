@@ -1,12 +1,19 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const Button = styled.button`
+interface ButtonProps {
+  marginLeft?: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
+}
+
+const Button = styled.button<ButtonProps>`
   min-width: 100px;
   max-width: 250px;
   margin-top: 24px;
   padding: 12px 24px;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: ${(props) => props.marginLeft || '0px'};
 `;
 
 export const PrimaryButton = styled(Button)`
@@ -22,7 +29,7 @@ export const SecondaryButton = styled(Button)`
   margin-left: 5px;
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled.button<ButtonProps>`
   cursor: pointer;
   font-size: 16px;
   border-radius: 0.3em;
@@ -32,4 +39,3 @@ export const CloseButton = styled.button`
   color: #fff;
   margin-bottom: 15px;
 `;
-

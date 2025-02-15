@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { useRef } from "react";
-import styled from "styled-components";
-import { Container, Display } from "./Body";
+import Image from 'next/image';
+import { useRef } from 'react';
+import styled from 'styled-components';
+import { Container, Display } from './Body';
 
 const ModalOverlay = styled.div`
   align-items: center;
@@ -58,8 +58,8 @@ export const Modal: React.FC<{
   };
 
   return (
-    <ModalOverlay onClick={handleCloseClick}>
-      <ModalWrapper ref={modalRef}>
+    <ModalOverlay as="div" onClick={handleCloseClick}>
+      <ModalWrapper as="div" ref={modalRef}>
         <ModalContainer>
           <ModalBody>{props.children}</ModalBody>
         </ModalContainer>
@@ -77,13 +77,13 @@ export const ModalResult: React.FC<{
       <Container>
         <Display>
           <Image
-            src={props.isSucesso ? "/success.svg" : "/error.svg"}
+            src={props.isSucesso ? '/success.svg' : '/error.svg'}
             alt="result"
             width={80}
             height={80}
           />
         </Display>
-        <Display display="block" style={{ marginTop: "30px" }}>
+        <Display display="block" marginTop="30px">
           {props.children}
         </Display>
       </Container>
