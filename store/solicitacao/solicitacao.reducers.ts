@@ -21,10 +21,6 @@ export const initialState: SolicitacaoState = {
     organizacao: '',
     sistema: '',
     arquivos: [],
-    dataHoraAtualizacao: '',
-    dataHoraCriacao: '',
-    usuarioCriacao: '',
-    usuarioAtualizacao: ''
   },
   enviada: false,
 };

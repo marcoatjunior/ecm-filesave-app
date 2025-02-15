@@ -14,15 +14,6 @@ export const Display = styled.div<DisplayProps>`
   justify-content: ${(props) => props.justifyContent || 'center'};
 `;
 
-export const DisplayImage = styled(Display)`
-  @media (max-width: 768px) {
-    img {
-      width: 300px !important;
-      height: 450px !important;
-    }
-  }
-`;
-
 export const Main = styled.main`
   min-height: 100vh;
   padding: 4rem 0;

@@ -1,9 +1,10 @@
+import { Container, Display } from '@/components/Shared';
+import { SecondaryButton } from '@/components/Shared/Button';
+import { Text } from '@/components/Shared/Text';
 import { ChangeEvent, Dispatch, useState } from 'react';
 import { acoes, upload } from 'resources/strings';
 import { UploadActions } from 'store/upload';
 import { Arquivo } from 'types';
-import { Container, Display, SecondaryButton } from '../Shared';
-import { Text } from '@/components/Shared/Text';
 
 type FileUploaderProps = { arquivo: Arquivo; dispatch: Dispatch<any> };
 
@@ -40,7 +41,7 @@ export const FileUploader = ({ arquivo, dispatch }: FileUploaderProps) => {
     <Container>
       <Display>
         <Text fontSize="18px" textAlign="center" fontWeight={600}>
-          Escolha os arquivos
+          {upload.selecioneArquivos}
         </Text>
       </Display>
       {erro && (
@@ -84,12 +85,11 @@ export const FileUploader = ({ arquivo, dispatch }: FileUploaderProps) => {
             lineHeight: '1.15',
           }}
         >
-          Escolher arquivos
+          {acoes.fazerUpload}
           <input
             type="file"
             onChange={handleFileChange}
-            multiple
-            accept={'application/pdf'}
+            accept="application/pdf"
             style={{ display: 'none' }}
           />
         </label>

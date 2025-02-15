@@ -5,6 +5,7 @@ export const home = {
 };
 
 export const upload = {
+  selecioneArquivos: 'Selecione os arquivos',
   mensagemSelecioneArquivosPdf: 'Selecione um ou vários arquivos .pdf',
   mensagemPermitidoArquivosPdf: 'Apenas arquivos .pdf são permitidos',
 };

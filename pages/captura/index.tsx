@@ -22,7 +22,6 @@ import {
   selectSolicitacao,
 } from 'store/solicitacao';
 import { UploadActions, uploadInitial, uploadReducer } from 'store/upload';
-import { Erro } from 'types';
 
 type CapturaPageProps = { apiUrl: string };
 
@@ -62,13 +61,23 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
     setArquivosEnviados(true);
     setLido(solicitacao.dados.arquivos.length);
 
-    solicitacao.dados.arquivos.forEach(({ form }) => {
-      inclui(apiUrl, form || {})
+    solicitacao.dados.arquivos.forEach((arquivo) => {
+      const conteudo = arquivo.form?.get('arquivos') as unknown as Buffer;
+      const form = {
+        organizacao: solicitacao.dados.organizacao,
+        sistema: solicitacao.dados.sistema,
+        nome: arquivo.nome,
+        tipo: arquivo.tipo,
+        numeroBytes: conteudo?.length,
+        usuarioCriacao: arquivo.usuarioCriacao,
+        conteudo,
+      };
+      inclui(apiUrl, form)
         .then(() => {
           setEnviado((enviado) => enviado + 1);
         })
         .catch(({ response }) => {
-          const { message } = response.data[0] as Erro;
+          const { message } = response.data;
           dispatcher(erroSolicitacao(message));
         });
     });
@@ -108,15 +117,11 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
     if (solicitacao.dados.dataHoraExpiracao === '') {
       return 0;
     }
-
-    console.log(solicitacao.dados?.dataHoraExpiracao);
-    let [data, horario] = solicitacao.dados?.dataHoraExpiracao?.split('T');
-    let [ano, mes, dia] = data?.split('-');
-    let [hora, minuto, segundo] = horario?.split(':');
-    let expiracao = new Date(+ano, +mes - 1, +dia, +hora, +minuto, +segundo);
-
-    return expiracao.getTime();
+    return new Date(solicitacao.dados.dataHoraExpiracao).getTime();
   };
+
+  const getArquivosCapturados = () =>
+    `Processando arquivo ${lido + 1} de ${arquivos.length}...`;
 
   const PaginaCaptura = () => {
     return (
@@ -131,7 +136,7 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
             {acoes.fazerUpload}
           </PrimaryButton>
 
-          {(!!upload.filesToUpload?.length) && (
+          {!!upload.filesToUpload?.length && (
             <SecondaryButton onClick={handleFinalizacao}>
               {acoes.finalizar}
             </SecondaryButton>
@@ -152,6 +157,9 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
           />
           <Container style={{ marginBottom: 'auto' }}>
             <Display justifyContent="space-between">
+              <Text fontSize="16px" textAlign="center" fontWeight={600}>
+                {getArquivosCapturados()}
+              </Text>
               <CloseButton onClick={() => dispatcher(cancelaSolicitacao())}>
                 x
               </CloseButton>
@@ -159,7 +167,7 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
 
             <Display display="grid" style={{ marginTop: '20px' }}>
               <Label fontSize="20px" textAlign="center">
-                {arquivoAtual?.tipo}
+                {arquivoAtual?.nome.toUpperCase()}
               </Label>
               <PaginaCaptura />
             </Display>

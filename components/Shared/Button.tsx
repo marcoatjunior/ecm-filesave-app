@@ -22,12 +22,6 @@ export const SecondaryButton = styled(Button)`
   margin-left: 5px;
 `;
 
-export const DarkButton = styled(SecondaryButton)`
-  background: #0F4091;
-  color: #fff;
-  border: none;
-`;
-
 export const CloseButton = styled.button`
   cursor: pointer;
   font-size: 16px;

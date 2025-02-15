@@ -6,8 +6,4 @@ export type Solicitacao = {
   organizacao: string;
   sistema: string;
   arquivos: Arquivo[];
-  dataHoraAtualizacao: string;
-  dataHoraCriacao: string;
-  usuarioCriacao: string;
-  usuarioAtualizacao: string;
 };
