@@ -62,17 +62,17 @@ const Captura: NextPage<CapturaPageProps> = ({ apiUrl }) => {
     setLido(solicitacao.dados.arquivos.length);
 
     solicitacao.dados.arquivos.forEach((arquivo) => {
-      const conteudo = arquivo.form?.get('arquivos') as unknown as Buffer;
-      const form = {
-        organizacao: solicitacao.dados.organizacao,
-        sistema: solicitacao.dados.sistema,
-        nome: arquivo.nome,
-        tipo: arquivo.tipo,
-        numeroBytes: conteudo?.length,
-        usuarioCriacao: arquivo.usuarioCriacao,
-        conteudo,
-      };
-      inclui(apiUrl, form)
+      const conteudo = arquivo.form?.get('arquivos') as unknown as Blob;
+      const formData = new FormData();
+      formData.append("organizacao", solicitacao.dados.organizacao);
+      formData.append("sistema", solicitacao.dados.sistema);
+      formData.append("nome", arquivo.nome);
+      formData.append("tipo", arquivo.tipo);
+      formData.append("usuarioCriacao", arquivo.usuarioCriacao);
+      formData.append("numeroBytes", conteudo?.size?.toString());
+      formData.append("conteudo", conteudo as any);
+      
+      inclui(apiUrl, formData)
         .then(() => {
           setEnviado((enviado) => enviado + 1);
         })

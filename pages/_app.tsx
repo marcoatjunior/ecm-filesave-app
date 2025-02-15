@@ -11,6 +11,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    document.title = 'ECM FileSave';
     const handleStart = (url: string) => {
       console.log(`handleStart: ${url}`);
 
