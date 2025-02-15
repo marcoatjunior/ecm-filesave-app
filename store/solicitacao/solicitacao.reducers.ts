@@ -16,18 +16,22 @@ export type SolicitacaoState = {
 
 export const initialState: SolicitacaoState = {
   dados: {
-    id: 0,
+    id: '',
     dataHoraExpiracao: '',
-    token: '',
-    url: '',
+    organizacao: '',
+    sistema: '',
     arquivos: [],
+    dataHoraAtualizacao: '',
+    dataHoraCriacao: '',
+    usuarioCriacao: '',
+    usuarioAtualizacao: ''
   },
   enviada: false,
 };
 
 export const solicitacaoReducer = createReducer(initialState, (builder) => {
   builder.addCase(decodificaQrcode, (state, { payload }) => {
-    if (state.dados.id === 0) {
+    if (state.dados.id === '') {
       state.dados = payload;
     }
   });

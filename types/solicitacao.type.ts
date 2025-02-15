@@ -1,9 +1,13 @@
 import { Arquivo } from "./arquivo.type";
 
 export type Solicitacao = {
-  id: number;
+  id: string;
   dataHoraExpiracao: string;
-  token: string;
-  url: string;
+  organizacao: string;
+  sistema: string;
   arquivos: Arquivo[];
+  dataHoraAtualizacao: string;
+  dataHoraCriacao: string;
+  usuarioCriacao: string;
+  usuarioAtualizacao: string;
 };

@@ -6,8 +6,3 @@ export const selectSolicitacao = createSelector(
   (state: RootState) => state.solicitacao,
   (state: SolicitacaoState) => state
 );
-
-export const selectUrlSolicitacao = createSelector(
-  (state: RootState) => state.solicitacao.dados.url,
-  (state: string) => state
-);

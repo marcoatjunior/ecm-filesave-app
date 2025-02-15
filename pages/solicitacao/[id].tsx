@@ -7,18 +7,16 @@ import { useAppDispatch } from 'store';
 import { decodificaQrcode, erroSolicitacao } from 'store/solicitacao';
 import { Solicitacao } from 'types';
 
-type SolicitacaoPageProps = { corsciApiUrl: string };
+type SolicitacaoPageProps = { apiUrl: string };
 
-const SolicitacaoPage: NextPage<SolicitacaoPageProps> = ({
-  corsciApiUrl: apiUrl,
-}) => {
+const SolicitacaoPage: NextPage<SolicitacaoPageProps> = ({ apiUrl }) => {
   const router = useRouter();
   const { id } = router.query;
   const [isLido, setIsLido] = useState(false);
   const [isConsultando, setIsConsultando] = useState(false);
   const dispatcher = useAppDispatch();
 
-  const populaState = (solicitacao: Solicitacao | null | undefined) => {
+  const populaState = (solicitacao: Solicitacao) => {
     if (!!solicitacao) {
       dispatcher(decodificaQrcode(solicitacao));
       setIsLido(true);
@@ -28,7 +26,7 @@ const SolicitacaoPage: NextPage<SolicitacaoPageProps> = ({
   useEffect(() => {
     if (!isConsultando && !!id) {
       setIsConsultando(true);
-      consulta(apiUrl, +id)
+      consulta(apiUrl, id as string)
         .then((res) => {
           populaState(res.data);
           setIsLido(true);

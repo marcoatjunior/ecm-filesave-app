@@ -1,7 +1,10 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { solicitacaoReducer } from './solicitacao';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    solicitacao: solicitacaoReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
